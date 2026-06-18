@@ -1,5 +1,6 @@
 import processamento_de_dados as pdd
 import os
+from grafos import criar_grafo
 
 words_list = {}
 data_path = os.path.join('data', 'text')
@@ -25,3 +26,9 @@ for period in os.listdir(data_path):
             words_list[period].append(frequency)
 
 pdd.list_write(savement_path, words_list)
+
+# cria um grafo para cada epoca
+grafos_por_epoca = {}
+for period, documentos in words_list.items():
+    grafos_por_epoca[period] = criar_grafo(documentos)
+    print(f"Grafo {period}: {len(grafos_por_epoca[period])} vértices")
