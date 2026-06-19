@@ -35,6 +35,5 @@ for period, documentos in words_list.items():
 
 
 from algoritmos import kruskal_todas_epocas, salvar_todos_resultados
-
 resultados_kruskal = kruskal_todas_epocas(grafos_por_epoca)
 salvar_todos_resultados(resultados_kruskal)
