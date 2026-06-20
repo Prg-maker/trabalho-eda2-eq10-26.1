@@ -32,3 +32,8 @@ grafos_por_epoca = {}
 for period, documentos in words_list.items():
     grafos_por_epoca[period] = criar_grafo(documentos)
     print(f"Grafo {period}: {len(grafos_por_epoca[period])} vértices")
+
+
+from algoritmos import kruskal_todas_epocas, salvar_todos_resultados
+resultados_kruskal = kruskal_todas_epocas(grafos_por_epoca)
+salvar_todos_resultados(resultados_kruskal)
