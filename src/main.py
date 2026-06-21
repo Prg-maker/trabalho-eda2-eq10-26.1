@@ -1,6 +1,8 @@
 import processamento_de_dados as pdd
 import os
 from grafos import criar_grafo
+from grafos import criar_grafo
+from algoritmos import bfs
 
 words_list = {}
 data_path = os.path.join('data', 'text')
@@ -37,3 +39,23 @@ for period, documentos in words_list.items():
 from algoritmos import kruskal_todas_epocas, salvar_todos_resultados
 resultados_kruskal = kruskal_todas_epocas(grafos_por_epoca)
 salvar_todos_resultados(resultados_kruskal)
+target_word = "economia" # palavra chave do bfs
+for target_period, target_graph in grafos_por_epoca.items():
+    if target_word in target_graph:
+        try:
+            bfs_result = bfs(target_graph, target_word)
+            total_words_found = sum(len(words) for words in bfs_result.values())
+            
+            save_data = {
+                "periodo": target_period,
+                "palavra_raiz": target_word,
+                "profundidade_arvore": len(bfs_result) - 1, 
+                "total_palavras": total_words_found,
+                "arvore_bfs": bfs_result 
+            }
+            
+            bfs_output_path = os.path.join("data", "processed", f"bfs_{target_period}_{target_word}.json")
+            pdd.list_write(bfs_output_path, save_data)
+            
+        except Exception as e:
+            print(f"Erro no periodo {target_period}: {e}")
