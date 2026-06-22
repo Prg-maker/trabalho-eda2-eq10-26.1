@@ -1,6 +1,8 @@
 import processamento_de_dados as pdd
 import os
 from grafos import criar_grafo
+from grafos import criar_grafo
+from algoritmos import bfs
 
 words_list = {}
 base_dir = os.path.dirname(os.path.abspath(__file__))
